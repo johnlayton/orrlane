@@ -1,0 +1,7 @@
+.idea
+.gradle
+.tool-versions
+build
+target
+cdk.out
+**/META-INF/native-image/**
