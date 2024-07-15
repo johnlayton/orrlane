@@ -1,0 +1,51 @@
+# $schema: https://raw.githubusercontent.com/openrewrite/rewrite/main/rewrite-core/openrewrite.json
+---
+type: specs.openrewrite.org/v1beta/style
+name: org.orrlane.NoStarImports
+styleConfigs:
+  - org.openrewrite.java.style.TabsAndIndentsStyle:
+      useTabCharacter: false
+  - org.openrewrite.java.style.ImportLayoutStyle:
+      classCountToUseStarImport: 999
+      nameCountToUseStarImport: 999
+      layout:
+        - import static all other imports
+        - <blank line>
+        - import all other imports
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.orrlane.MavenBestPractices
+displayName: Maven BestPractices
+recipeList:
+  - org.openrewrite.maven.BestPractices
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.orrlane.CodeBestPractices
+displayName: Code BestPractices
+recipeList:
+  - org.openrewrite.java.RemoveUnusedImports
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.orrlane.UpgradeToJava21
+displayName: Spring Boot and Java Upgrade
+recipeList:
+  - org.openrewrite.java.migrate.UpgradeToJava21
+  - org.openrewrite.java.migrate.UpgradeBuildToJava21
+  - org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.orrlane.GithubActions
+displayName: GithubActions Upgrade
+recipeList:
+  - org.openrewrite.github.ChangeDependabotScheduleInterval:
+      packageEcosystem: gradle
+      interval: daily
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.orrlane.DependencyListExample
+displayName: Dependency report example
+recipeList:
+  - org.openrewrite.java.dependencies.DependencyVulnerabilityCheck
+  - org.openrewrite.java.dependencies.DependencyList:
+      scope: Compile
+      includeTransitive: true

@@ -1,0 +1,201 @@
+# $schema: https://json.schemastore.org/github-workflow.json
+name: Main
+
+on:
+  push:
+  pull_request:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  packages: write
+  contents: read
+
+env:
+  AWS_REGION: ap-southeast-2
+  AWS_ACCOUNT: ${{ vars.AWS_ACCOUNT }}
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and export
+        uses: docker/build-push-action@v6
+        with:
+          context: "{{defaultContext}}:img"
+          tags: al2023-graalvm21:latest
+          outputs: type=docker,dest=/tmp/myimage.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: myimage
+          path: /tmp/myimage.tar
+
+  maven:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: myimage
+          path: /tmp
+
+      - name: Load image
+        run: |
+          docker load --input /tmp/myimage.tar
+          docker image ls -a     
+
+      - name: Docker - Maven Build Native
+        run: |
+          docker run --rm \
+          -v `pwd`:`pwd` \
+          -w `pwd` \
+          -v ~/.m2:/root/.m2 \
+          al2023-graalvm21:latest \
+          ./mvnw -Pnative clean package -DskipTests
+
+  gradle:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: myimage
+          path: /tmp
+
+      - name: Load image
+        run: |
+          docker load --input /tmp/myimage.tar
+          docker image ls -a     
+
+      - name: Docker - Gradle Build Native
+        run: |
+          docker run --rm \
+            -v `pwd`:`pwd` \
+            -w `pwd` \
+            al2023-graalvm21:latest \
+            ./gradlew -Pnative app:nativeCompile app:customDistZip app:createFunctionZip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: function
+          path: app/build/function.zip
+
+  publish:
+    needs: gradle
+
+    runs-on: ubuntu-latest
+
+    if: contains('refs/heads/main', github.ref)
+
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.3.0"
+
+      - name: Install CDK
+        run: |
+          npm install -g aws-cdk
+
+      - name: Configure credentials
+        if: ${{ !env.ACT }}
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithAction
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: AWS - Configure credentials
+        if: ${{ env.ACT }}
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Gradle Native Dependencies
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: -Pnative app:dependencies --configuration implementation
+
+      - name: Gradle Local Dependencies
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: -Plocal app:dependencies --configuration implementation
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: function
+          path: app/build
+
+      - name: Deploy Lambda Resources
+        run: |
+          cd iac
+          cdk --version
+          cdk diff
+          cdk synth
+          cdk deploy --require-approval never
+
+      - name: GetCallerIdentity
+        run: |
+          aws --no-cli-pager sts get-caller-identity
+
+      - name: List Lambda Functions
+        run: |
+          aws --no-cli-pager lambda list-functions
+
+      - name: Test Lambda
+        run: |
+          STACK_NAME=IacStack
+          API_URL="$(aws --no-cli-pager cloudformation describe-stacks \
+            --stack-name $STACK_NAME --query 'Stacks[0].Outputs[?OutputKey==`DemoTestApiUrl`].OutputValue' \
+            --output text)"
+          RESPONSE="$(curl --silent --header \"Content-Type: application/json\" --request GET $API_URL)"
+          echo "========================================="
+          echo $RESPONSE
+          echo "========================================="

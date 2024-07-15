@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.1</version>
+        <relativePath/>
+    </parent>
+    <groupId>org.orrlane</groupId>
+    <artifactId>orrlane</artifactId>
+    <version>T.B.A.</version>
+    <packaging>pom</packaging>
+    <description>Sample of AWS with Spring Native</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <spring-cloud.version>2022.0.5</spring-cloud.version>
+    </properties>
+
+    <modules>
+        <module>app</module>
+        <module>iac</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openrewrite.recipe</groupId>
+                <artifactId>rewrite-recipe-bom</artifactId>
+                <version>2.14.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openrewrite.maven</groupId>
+                <artifactId>rewrite-maven-plugin</artifactId>
+                <version>5.35.0</version>
+                <configuration>
+                    <activeRecipes>
+                        <!--
+                        <recipe>org.orrlane.MavenBestPractices</recipe>
+                        <recipe>org.orrlane.CodeBestPractices</recipe>
+                        <recipe>org.orrlane.UpgradeToJava21</recipe>
+                        -->
+                        <recipe>org.orrlane.DependencyListExample</recipe>
+                    </activeRecipes>
+                    <activeStyles>
+                        <style>org.orrlane.NoStarImports</style>
+                    </activeStyles>
+                    <exportDatatables>true</exportDatatables>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.openrewrite.recipe</groupId>
+                        <artifactId>rewrite-migrate-java</artifactId>
+                        <version>2.19.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.openrewrite.recipe</groupId>
+                        <artifactId>rewrite-spring</artifactId>
+                        <version>5.14.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.openrewrite.recipe</groupId>
+                        <artifactId>rewrite-github-actions</artifactId>
+                        <version>2.6.2</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>

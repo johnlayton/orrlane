@@ -1,0 +1,20 @@
+### Invoke the Perform Endpoint
+
+< {%
+    request.variables.set("host", "localhost")
+    request.variables.set("masked", request.environment.get("MASKED"))
+%}
+
+GET http://{{ host }}:8080/demo
+Accept: application/json
+Content-Type: application/json
+
+#< perform.json
+
+> {%
+    console.log(response.body);
+
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}

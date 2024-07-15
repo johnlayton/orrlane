@@ -1,0 +1,36 @@
+# nonk8s
+# $schema:https://json.schemastore.org/catalog-info.json
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: orrlane
+  title: Orr Lane
+  annotations:
+    github.com/project-slug: johnlayton/orrlane
+    backstage.io/techdocs-ref: dir:.
+  links:
+    - url: https://backstage.io/
+      title: Backstage
+      icon: docs
+    - url: https://johnlayton.github.io/orrlane
+      title: Github Pages
+      icon: github
+spec:
+  type: service
+  owner: development
+  lifecycle: production
+  system: tonylcourt
+  providesApis:
+    - orrlane-openapi
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: orrlane-openapi
+spec:
+  type: openapi
+  lifecycle: production
+  owner: development
+  system: tonylcourt
+  definition:
+    $openapi: https://johnlayton.github.io/orrlane/openapi.yaml
