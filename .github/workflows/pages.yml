@@ -50,6 +50,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
 
   deploy:
+    if: contains('refs/heads/main', github.ref)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
