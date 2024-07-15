@@ -39,7 +39,7 @@ spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-start
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 springdoc-openapi-starter-webmvc-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "spring.doc"}
 springdoc-openapi-starter-webmvc-api = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-api", version.ref = "spring.doc"}
-org-openrewrite-recipe = { group = 'org.openrewrite.recipe', name = 'rewrite-recipe-bom', version = '2.14.0' }
+org-openrewrite-recipe = { group = 'org.openrewrite.recipe', name = 'rewrite-recipe-bom', version = '2.15.0' }
 aws-serverless-java-container-springboot3 = { group = 'com.amazonaws.serverless', name = 'aws-serverless-java-container-springboot3', version = '2.0.3' }
 spring-boot-starter = { module = 'org.springframework.boot:spring-boot-starter' }
 spring-boot-starter-test = { module = 'org.springframework.boot:spring-boot-starter-test' }
