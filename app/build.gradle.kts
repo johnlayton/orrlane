@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     implementation(libs.spring.boot.starter)
+    implementation(libs.logstash.logback.encoder)
     if (project.hasProperty("native")) {
         implementation(libs.aws.serverless.java.container.springboot3)
     } else {

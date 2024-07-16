@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: orrlane
+  main:
+    banner-mode: off
 
 logging:
   level:
