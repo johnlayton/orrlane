@@ -8,6 +8,7 @@ import software.amazon.awscdk.services.apigateway.LambdaRestApi;
 import software.amazon.awscdk.services.lambda.Architecture;
 import software.amazon.awscdk.services.lambda.Code;
 import software.amazon.awscdk.services.lambda.Function;
+import software.amazon.awscdk.services.lambda.LoggingFormat;
 import software.amazon.awscdk.services.lambda.Runtime;
 import software.amazon.awscdk.services.lambda.Tracing;
 import software.amazon.awscdk.services.logs.RetentionDays;
@@ -29,6 +30,7 @@ public class IacStack extends Stack {
                 .timeout(Duration.seconds(10))
                 .memorySize(2048)
                 .logRetention(RetentionDays.ONE_WEEK)
+                .loggingFormat(LoggingFormat.JSON)
                 .tracing(Tracing.ACTIVE)
                 .architecture(Architecture.X86_64)
                 .build();
