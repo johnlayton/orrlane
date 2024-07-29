@@ -6,10 +6,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       MemorySize: 512
-      FunctionName: demo-hello-world
+      FunctionName: orrlane
       Timeout: 15
-#      CodeUri: ./app/target/app-0.0.0-main-SNAPSHOT-native-zip.zip
-      CodeUri: ./app/build/distributions/app-custom.zip
+      CodeUri: ./app/build/function.zip
       Handler: NOP
       Runtime: provided.al2023
 #     If you want to build for ARM64 uncomment the following lines
@@ -26,6 +25,7 @@ Globals:
   Api:
     # API Gateway regional endpoints
     EndpointConfiguration: REGIONAL
+
 Outputs:
   ServerlessDemoHelloWorldApi:
     Description: URL for application
