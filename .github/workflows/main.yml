@@ -16,6 +16,7 @@ permissions:
 env:
   AWS_REGION: ap-southeast-2
   AWS_ACCOUNT: ${{ vars.AWS_ACCOUNT }}
+  HONEYCOMB_KEY: ${{ secrets.HONEYCOMB_KEY }}
 
 jobs:
 
@@ -108,7 +109,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: contains('refs/heads/main', github.ref)
+#    if: contains('refs/heads/main', github.ref)
 
     steps:
       - name: Git clone the repository
