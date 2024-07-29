@@ -14,6 +14,9 @@ import software.amazon.awscdk.services.lambda.Tracing;
 import software.amazon.awscdk.services.logs.RetentionDays;
 import software.constructs.Construct;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class IacStack extends Stack {
     public IacStack(final Construct scope, final String id) {
         this(scope, id, null);
@@ -22,7 +25,12 @@ public class IacStack extends Stack {
     public IacStack(final Construct scope, final String id, final StackProps props) {
         super(scope, id, props);
 
-        // Define the Lambda resource
+//        this.getNode().tryGetContext()
+
+        Map<String, String> env = System.getenv().entrySet().stream()
+                .filter(entry -> entry.getKey().equals("HONEYCOMB_KEY"))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
         Function function = Function.Builder.create(this, "HelloWorldFunction")
                 .runtime(Runtime.PROVIDED_AL2023)
                 .code(Code.fromAsset(functionPath()))
@@ -33,15 +41,15 @@ public class IacStack extends Stack {
                 .loggingFormat(LoggingFormat.JSON)
                 .tracing(Tracing.ACTIVE)
                 .architecture(Architecture.X86_64)
+                .environment(env)
                 .build();
 
-        // Define the API Gateway resource
-//                .proxy(false)
+/*
+        .proxy(false)
+*/
         LambdaRestApi api = LambdaRestApi.Builder.create(this, "HelloWorldApi")
                 .handler(function)
                 .build();
-
-        // Define the '/hello' resource and its GET method
 /*
         Resource helloResource = api.getRoot().addResource("demo");
         helloResource.addMethod("GET");

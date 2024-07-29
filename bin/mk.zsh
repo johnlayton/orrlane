@@ -46,12 +46,27 @@
 #  al2023-graalvm21:latest \
 #  ./mvnw -Pnative clean package -DskipTests
 
-docker run -it \
-  -v `pwd`:`pwd` \
-  -w `pwd` \
-  al2023-graalvm21:latest \
-  gradle -Pnative app:clean app:nativeCompile app:customDistZip app:createFunctionZip
-#  gradle -Pnative clean nativeCompile distZip app:moveDist
+#docker run -it \
+#  -v `pwd`:`pwd` \
+#  -w `pwd` \
+#  al2023-graalvm21:latest \
+#  gradle -Pnative app:clean app:nativeCompile app:customDistZip app:createFunctionZip
+
+#docker run -it \
+#  -v `pwd`:`pwd` \
+#  -w `pwd` \
+#  al2023-graalvm21:latest \
+#  gradle -Pnative app:clean app:nativeCompile
+
+./gradlew app:clean app:nativeCompile
+
+#gradle -Pnative app:clean app:nativeCompile
+
+#./mvnw -Pnative clean package
+
+#./gradlew -Pnative clean nativeCompile
+
+#./gradlew clean nativeCompile
 
 #sam deploy --guided
 

@@ -10,3 +10,13 @@ spring:
 logging:
   level:
     org.springframework: INFO
+
+otel:
+  service:
+    name: orrlane
+  exporter:
+    otlp:
+      endpoint: https://api.honeycomb.io
+      protocol: http/protobuf
+      headers:
+        x-honeycomb-team: ${HONEYCOMB_KEY}

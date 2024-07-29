@@ -1,3 +1,9 @@
+buildscript {
+    extra.apply{
+        set("opentelemetry.version", "1.40.0")
+    }
+}
+
 plugins {
     java
     application
@@ -13,8 +19,11 @@ repositories {
 }
 
 dependencies {
+    implementation(platform(libs.opentelemetry.instrumentation.bom))
+    implementation(platform(libs.opentelemetry.bom))
     implementation(libs.spring.boot.starter)
     implementation(libs.logstash.logback.encoder)
+    implementation(libs.opentelemetry.spring.boot.starter)
     if (project.hasProperty("native")) {
         implementation(libs.aws.serverless.java.container.springboot3)
     } else {

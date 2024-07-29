@@ -5,7 +5,7 @@
     request.variables.set("masked", request.environment.get("MASKED"))
 %}
 
-GET http://{{ host }}:8080/demo
+GET http://{{ host }}:8080
 Accept: application/json
 Content-Type: application/json
 

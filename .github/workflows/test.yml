@@ -1,0 +1,32 @@
+# $schema: https://json.schemastore.org/github-workflow.json
+name: Test
+
+on:
+  push:
+  pull_request:
+    branches:
+      - "add_tracing"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  packages: write
+  contents: read
+
+env:
+  AWS_REGION: ap-southeast-2
+  AWS_ACCOUNT: ${{ vars.AWS_ACCOUNT }}
+  HONEYCOMB_KEY: ${{ secrets.HONEYCOMB_KEY }}
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test Environment
+        run: |
+          echo "========================================="
+          echo ${HONEYCOMB_KEY}
+          echo ${AWS_ACCOUNT}
+          echo "========================================="
