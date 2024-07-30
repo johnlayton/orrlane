@@ -17,6 +17,10 @@ env:
   AWS_REGION: ap-southeast-2
   AWS_ACCOUNT: ${{ vars.AWS_ACCOUNT }}
   HONEYCOMB_KEY: ${{ secrets.HONEYCOMB_KEY }}
+  OTEL_SERVICE_NAME: orrlane
+  OTEL_EXPORTER_OTLP_ENDPOINT: https://api.honeycomb.io
+  OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+  OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team:  ${{ secrets.HONEYCOMB_KEY }}"
 
 jobs:
 

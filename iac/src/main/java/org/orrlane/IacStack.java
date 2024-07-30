@@ -28,7 +28,7 @@ public class IacStack extends Stack {
 //        this.getNode().tryGetContext()
 
         Map<String, String> env = System.getenv().entrySet().stream()
-                .filter(entry -> entry.getKey().equals("HONEYCOMB_KEY"))
+                .filter(entry -> entry.getKey().equals("HONEYCOMB_KEY") || entry.getKey().startsWith("OTEL_"))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         Function function = Function.Builder.create(this, "HelloWorldFunction")
