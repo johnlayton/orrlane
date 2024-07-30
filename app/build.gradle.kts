@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     implementation(platform(libs.opentelemetry.instrumentation.bom))
-//    implementation(platform(libs.opentelemetry.bom))
+    implementation(platform(libs.opentelemetry.bom))
     implementation(libs.spring.boot.starter)
     implementation(libs.logstash.logback.encoder)
     implementation(libs.opentelemetry.spring.boot.starter)
