@@ -64,7 +64,7 @@ opentelemetry-spring-boot-starter = { module = 'io.opentelemetry.instrumentation
 spring-boot = { id = 'org.springframework.boot', version.ref = 'spring.boot' }
 spring-dependency-management = { id = 'io.spring.dependency-management', version.ref = 'spring.deps' }
 graalvm-buildtools-native = { id = 'org.graalvm.buildtools.native', version.ref = 'buildtools.native' }
-openrewrite-rewrite = { id = 'org.openrewrite.rewrite', version = '6.16.4' }
+openrewrite-rewrite = { id = 'org.openrewrite.rewrite', version = '6.17.1' }
 gradle-jgitver = { id = 'fr.brouillard.oss.gradle.jgitver', version = '0.10.0-rc03' }
 openapi-gradle-plugin = { id = 'org.springdoc.openapi-gradle-plugin', version = '1.9.0' }
 
