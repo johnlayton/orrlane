@@ -138,7 +138,7 @@ jobs:
         with:
           aws-region: ${{ env.AWS_REGION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
       - name: Gradle Native Dependencies
         uses: gradle/gradle-build-action@v3
         with:
