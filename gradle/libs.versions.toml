@@ -36,7 +36,7 @@ spring-doc = "2.5.0"
 #itext = { group = "com.itextpdf", name = "itext-core", version = "8.0.1" }
 org-openrewrite-recipe = { group = 'org.openrewrite.recipe', name = 'rewrite-recipe-bom', version = '2.15.0' }
 #opentelemetry-instrumentation-bom = { group = 'io.opentelemetry.instrumentation', name = 'opentelemetry-instrumentation-bom-alpha', version = '2.6.0-alpha' }
-opentelemetry-bom = { group = 'io.opentelemetry', name = 'opentelemetry-bom', version = '1.40.0' }
+opentelemetry-bom = { group = 'io.opentelemetry', name = 'opentelemetry-bom', version = '1.41.0' }
 opentelemetry-instrumentation-bom = { group = 'io.opentelemetry.instrumentation', name = 'opentelemetry-instrumentation-bom', version = '2.6.0' }
 
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
