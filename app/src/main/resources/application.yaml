@@ -9,7 +9,8 @@ spring:
 
 logging:
   level:
-    org.springframework: INFO
+    org.springframework: DEBUG
+    com.amazonaws.serverless: DEBUG
 
 otel:
   service:
@@ -20,3 +21,4 @@ otel:
       protocol: http/protobuf
       headers:
         x-honeycomb-team: ${HONEYCOMB_KEY}
+
