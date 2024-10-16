@@ -34,7 +34,7 @@ spring-doc = "2.5.0"
 #pdfbox = { group = "org.apache.pdfbox", name = "pdfbox", version = "3.0.0" }
 #openpdf = { group = "com.github.librepdf", name = "openpdf", version = "1.3.30" }
 #itext = { group = "com.itextpdf", name = "itext-core", version = "8.0.1" }
-org-openrewrite-recipe = { group = 'org.openrewrite.recipe', name = 'rewrite-recipe-bom', version = '2.20.0' }
+org-openrewrite-recipe = { group = 'org.openrewrite.recipe', name = 'rewrite-recipe-bom', version = '2.21.0' }
 #opentelemetry-instrumentation-bom = { group = 'io.opentelemetry.instrumentation', name = 'opentelemetry-instrumentation-bom-alpha', version = '2.8.0-alpha' }
 opentelemetry-bom = { group = 'io.opentelemetry', name = 'opentelemetry-bom', version = '1.43.0' }
 opentelemetry-instrumentation-bom = { group = 'io.opentelemetry.instrumentation', name = 'opentelemetry-instrumentation-bom', version = '2.8.0' }
