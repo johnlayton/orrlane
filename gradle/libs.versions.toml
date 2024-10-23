@@ -47,7 +47,7 @@ aws-serverless-java-container-springboot3 = { group = 'com.amazonaws.serverless'
 spring-boot-starter = { module = 'org.springframework.boot:spring-boot-starter' }
 spring-boot-starter-test = { module = 'org.springframework.boot:spring-boot-starter-test' }
 junit-platform-launcher = { module = 'org.junit.platform:junit-platform-launcher' }
-aws-cdk-lib = { group = 'software.amazon.awscdk', name = 'aws-cdk-lib', version = '2.162.1' }
+aws-cdk-lib = { group = 'software.amazon.awscdk', name = 'aws-cdk-lib', version = '2.163.1' }
 junit-jupiter-api = { group = 'org.junit.jupiter', name = 'junit-jupiter-api', version = '5.11.2' }
 junit-jupiter-engine = { group = 'org.junit.jupiter', name = 'junit-jupiter-engine', version = '5.11.2' }
 logstash-logback-encoder = { group = 'net.logstash.logback', name = 'logstash-logback-encoder', version = '8.0' }
