@@ -39,7 +39,7 @@ displayName: GithubActions Upgrade
 recipeList:
   - org.openrewrite.github.ChangeDependabotScheduleInterval:
       packageEcosystem: gradle
-      interval: daily
+      interval: weekly
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: org.orrlane.DependencyListExample
