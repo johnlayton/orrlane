@@ -27,7 +27,7 @@ dependencies {
     implementation("io.opentelemetry:opentelemetry-api");
     implementation("io.opentelemetry:opentelemetry-sdk");
     implementation("io.opentelemetry:opentelemetry-exporter-logging");
-    implementation("io.opentelemetry.semconv:opentelemetry-semconv:1.28.0-alpha");
+    implementation("io.opentelemetry.semconv:opentelemetry-semconv:1.29.0-alpha");
     implementation("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure");
     if (project.hasProperty("native")) {
         implementation(libs.aws.serverless.java.container.springboot3)
