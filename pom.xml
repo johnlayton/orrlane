@@ -104,7 +104,7 @@
                     <dependency>
                         <groupId>org.openrewrite.recipe</groupId>
                         <artifactId>rewrite-github-actions</artifactId>
-                        <version>2.10.1</version>
+                        <version>3.0.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
