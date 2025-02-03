@@ -132,14 +132,14 @@ jobs:
           npm install -g aws-cdk
       - name: Configure credentials
         if: ${{ !env.ACT }}
-        uses: aws-actions/configure-aws-credentials@v4.0.2
+        uses: aws-actions/configure-aws-credentials@v4.0.3
         with:
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithAction
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
       - name: AWS - Configure credentials
         if: ${{ env.ACT }}
-        uses: aws-actions/configure-aws-credentials@v4.0.2
+        uses: aws-actions/configure-aws-credentials@v4.0.3
         with:
           aws-region: ${{ env.AWS_REGION }}
       - name: Setup Gradle
