@@ -47,9 +47,9 @@ aws-serverless-java-container-springboot3 = { group = 'com.amazonaws.serverless'
 spring-boot-starter = { module = 'org.springframework.boot:spring-boot-starter' }
 spring-boot-starter-test = { module = 'org.springframework.boot:spring-boot-starter-test' }
 junit-platform-launcher = { module = 'org.junit.platform:junit-platform-launcher' }
-aws-cdk-lib = { group = 'software.amazon.awscdk', name = 'aws-cdk-lib', version = '2.184.1' }
-junit-jupiter-api = { group = 'org.junit.jupiter', name = 'junit-jupiter-api', version = '5.11.3' }
-junit-jupiter-engine = { group = 'org.junit.jupiter', name = 'junit-jupiter-engine', version = '5.11.3' }
+aws-cdk-lib = { group = 'software.amazon.awscdk', name = 'aws-cdk-lib', version = '2.171.1' }
+junit-jupiter-api = { group = 'org.junit.jupiter', name = 'junit-jupiter-api', version = '5.12.1' }
+junit-jupiter-engine = { group = 'org.junit.jupiter', name = 'junit-jupiter-engine', version = '5.12.1' }
 logstash-logback-encoder = { group = 'net.logstash.logback', name = 'logstash-logback-encoder', version = '8.0' }
 opentelemetry-spring-boot-starter = { module = 'io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter' }
 
@@ -64,7 +64,7 @@ opentelemetry-spring-boot-starter = { module = 'io.opentelemetry.instrumentation
 spring-boot = { id = 'org.springframework.boot', version.ref = 'spring.boot' }
 spring-dependency-management = { id = 'io.spring.dependency-management', version.ref = 'spring.deps' }
 graalvm-buildtools-native = { id = 'org.graalvm.buildtools.native', version.ref = 'buildtools.native' }
-openrewrite-rewrite = { id = 'org.openrewrite.rewrite', version = '6.28.1' }
+openrewrite-rewrite = { id = 'org.openrewrite.rewrite', version = '7.2.0' }
 gradle-jgitver = { id = 'fr.brouillard.oss.gradle.jgitver', version = '0.10.0-rc03' }
 openapi-gradle-plugin = { id = 'org.springdoc.openapi-gradle-plugin', version = '1.9.0' }
 
