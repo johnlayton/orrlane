@@ -37,7 +37,7 @@ jobs:
           tags: al2023-graalvm21:latest
           outputs: type=docker,dest=/tmp/myimage.tar
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: myimage
           path: /tmp/myimage.tar
@@ -103,7 +103,7 @@ jobs:
             al2023-graalvm21:latest \
             ./gradlew -Pnative app:nativeCompile app:customDistZip app:createFunctionZip
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: function
           path: app/build/function.zip
